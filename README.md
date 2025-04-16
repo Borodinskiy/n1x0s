@@ -6,6 +6,7 @@ Inputs:
 - Nixpkgs stable
 - Nixpkgs unstable
 - Home-manager module
+- Disko module
 
 ## Structure
 

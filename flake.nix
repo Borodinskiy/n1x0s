@@ -65,7 +65,7 @@
 
       defaultForModule = moduleName: [
         ./options
-        ./module/${moduleName}
+        ./modules/${moduleName}
       ];
 
       specialArgs = {
