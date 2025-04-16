@@ -34,15 +34,15 @@
       user_uid = sigmaUidStr;
       #user_gid = "100";  # "users" group id
 
-      fsoptions_lin = [
+      fsoptionsLin = [
         "rw"
         "discard"
       ];
-      fsoptions_hdd = [
+      fsoptionsHDD = [
         "rw"
         "uid=${user_uid}"
       ];
-      fsoptions_ssd = [
+      fsoptionsSSD = [
         "rw"
         "uid=${user_uid}"
         "discard"
@@ -52,7 +52,7 @@
       "/" = {
         device = "/dev/disk/by-uuid/8b915372-6eb3-4b67-97ff-5e666d01434c";
         fsType = "ext4";
-        options = fsoptions_lin;
+        options = fsoptionsLin;
       };
       "/efi" = {
         device = "/dev/disk/by-uuid/F2AE-D541";
@@ -65,17 +65,17 @@
       "/run/media/${sigmaUser}/drive_d" = {
         device = "/dev/disk/by-uuid/F092237692234108";
         fsType = "ntfs3";
-        options = fsoptions_hdd;
+        options = fsoptionsHDD;
       };
       "/run/media/${sigmaUser}/drive_g" = {
         device = "/dev/disk/by-uuid/54E4EE59E4EE3D3C";
         fsType = "ntfs3";
-        options = fsoptions_ssd;
+        options = fsoptionsSSD;
       };
       "/run/media/${sigmaUser}/drive_p" = {
         device = "/dev/disk/by-uuid/262CBC932CBC600B";
         fsType = "ntfs3";
-        options = fsoptions_ssd;
+        options = fsoptionsSSD;
       };
     };
 
