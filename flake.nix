@@ -32,35 +32,47 @@
       # Alias for function that generate attrs for systems that defined in variable above
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
+      resourcePath = ./resources;
+
       # Default user, that will be used in most config places
       sigmaUser = "borodinskiy";
       sigmaUid = 1337;
       sigmaUidStr = builtins.toString sigmaUid;
 
+      # This function will non recursively show *.nix files and directories by path
+      # Used in most config places, so no need to write huge default.nix file
       lsDir =
         path:
         map (file: "${path}/${file}") (
           builtins.filter (
             file:
-            builtins.readFileType "${path}/${file}" == "regular"
+            "${file}" != "default.nix"
+            && builtins.readFileType "${path}/${file}" == "regular"
             && nixpkgs.lib.strings.hasSuffix ".nix" "${file}"
           ) (builtins.attrNames (builtins.readDir path))
         );
 
       # Default modules arrays
 
-      defaultNixos = lsDir ./options ++ lsDir ./nixos;
+      defaultNixos = [
+        ./options
+        ./nixos
+      ];
 
       nixosServer = [
         inputs.disko.nixosModules.disko
       ];
 
-      defaultForModule = moduleName: lsDir ./options ++ lsDir ./module/${moduleName};
+      defaultForModule = moduleName: [
+        ./options
+        ./module/${moduleName}
+      ];
 
       specialArgs = {
         inherit
           inputs
           outputs
+          resourcePath
           sigmaUser
           sigmaUid
           sigmaUidStr
@@ -75,7 +87,7 @@
         }:
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
-          modules = defaultNixos ++ extraModules ++ (lsDir ./hosts/${hostname});
+          modules = defaultNixos ++ extraModules ++ [ ./hosts/${hostname} ];
         };
 
       homeManager =
@@ -83,12 +95,11 @@
         inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = specialArgs;
-          modules = (defaultForModule "home-manager") ++ (lsDir ./hosts/${hostname}/home-manager);
+          modules = (defaultForModule "home-manager") ++ [ ./hosts/${hostname}/home-manager ];
         };
 
       hostLaptop = "HP1";
       hostPc = "bhd";
-      hostUsb = "border";
 
       hostServer = "costeglaz-inc";
     in
@@ -100,7 +111,6 @@
       nixosConfigurations = {
         "${hostLaptop}" = nixosSystem { hostname = "${hostLaptop}"; }; # laptop
         "${hostPc}" = nixosSystem { hostname = "${hostPc}"; }; # pc
-        "${hostUsb}" = nixosSystem { hostname = "${hostUsb}"; }; # usb multitool
 
         # hostServer
         "${hostServer}" = nixosSystem {
@@ -112,7 +122,6 @@
       homeConfigurations = {
         "${sigmaUser}@${hostLaptop}" = homeManager "${hostLaptop}"; # Laptop
         "${sigmaUser}@${hostPc}" = homeManager "${hostPc}"; # hostPc
-        "${sigmaUser}@${hostUsb}" = homeManager "${hostUsb}"; # USB multitoolh
       };
     };
 }

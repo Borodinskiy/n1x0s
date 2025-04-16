@@ -3,6 +3,7 @@
   config,
   lib,
   sigmaUser,
+  resourcePath,
   ...
 }:
 let
@@ -36,10 +37,10 @@ in
       # Custom
 
       (writeTextDir "share/cups/model/i-sensys-MF4410.ppd" (
-        builtins.readFile ./res/ppd/canon/i-sensys-MF4410.ppd
+        builtins.readFile (resourcePath + "/ppd/canon/i-sensys-MF4410.ppd")
       ))
       (writeTextDir "share/cups/model/xerox-phaser-3020.ppd" (
-        builtins.readFile ./res/ppd/phaser3020/Samsung_M2020_Series.ppd
+        builtins.readFile (resourcePath + "/ppd/phaser3020/Samsung_M2020_Series.ppd")
       ))
     ];
   };

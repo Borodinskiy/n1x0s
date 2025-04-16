@@ -1,0 +1,4 @@
+{ lsDir, ... }:
+{
+  imports = lsDir ./.;
+}

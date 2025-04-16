@@ -1,5 +1,8 @@
+{ lsDir, ... }:
 {
   networking.hostName = "bhd";
+
+  imports = lsDir ./.;
 
   module = {
     purpose.home = true;

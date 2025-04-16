@@ -4,19 +4,30 @@
   sigmaUser,
   ...
 }:
+let
+  cfg = config.module.purpose;
+in
 {
-  services.openssh = {
-    enable = true;
+  config = lib.mkMerge [
+    (lib.mkIf cfg.home {
+      systemd.units.sshd.wantedBy = lib.mkForce [ ];
+    })
 
-    openFirewall = config.module.purpose.server;
-    ports = [ 40242 ];
+    ({
+      services.openssh = {
+        enable = true;
 
-    settings = {
-      AllowUsers = [ "${sigmaUser}" ];
-      PasswordAuthentication = true;
-      PermitRootLogin = lib.mkDefault "no";
-      UseDns = true;
-      X11Forwarding = false;
-    };
-  };
+        openFirewall = cfg.server;
+        ports = [ 40242 ];
+
+        settings = {
+          AllowUsers = [ "${sigmaUser}" ];
+          PasswordAuthentication = true;
+          PermitRootLogin = lib.mkDefault "no";
+          UseDns = true;
+          X11Forwarding = false;
+        };
+      };
+    })
+  ];
 }
