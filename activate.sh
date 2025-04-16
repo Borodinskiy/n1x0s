@@ -24,6 +24,6 @@ install -d -m 700 "$WORKDIR"
 cp -r hosts modules nixos options overlays pkgs resources flake.lock flake.nix \
 	"$WORKDIR"
 
-$RUNME --flake "$WORKDIR#${2:-$(hostname)}" "$1"
+$RUNME --flake "$WORKDIR#${2:-$(hostname)}" -L "$1"
 
 rm -rf "$WORKDIR"

@@ -39,6 +39,7 @@
       "steam-unwrapped"
       "steam-original"
       "steam-run"
+      "steamcmd"
       # Electon bullshitt
       "obsidian"
       # Printer

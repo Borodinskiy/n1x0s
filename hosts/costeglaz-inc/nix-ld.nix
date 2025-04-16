@@ -1,12 +1,17 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+  cfg = config.module.include.gaming;
+in
 {
-  programs.nix-ld = {
-    enable = false;
-    libraries = with pkgs; [
-      stdenv.cc.cc.lib
-      libz
-      gnutls
-      curlWithGnuTls
-    ];
+  config = lib.mkIf cfg {
+    programs.nix-ld = {
+      enable = false;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        libz
+        gnutls
+        curlWithGnuTls
+      ];
+    };
   };
 }
