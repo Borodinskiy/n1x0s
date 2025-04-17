@@ -1,4 +1,7 @@
+{ lsDir, ... }:
 {
+  imports = lsDir ./.;
+
   services.syncthing.enable = true;
 
   module.purpose.home = true;

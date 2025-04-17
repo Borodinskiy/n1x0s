@@ -1,29 +1,30 @@
 #!/usr/bin/env bash
 
-if [ "$1" == "" ]
-then
-	echo "Usage: $0 [dry-build/switch/boot] [hostname(optional)]"
-	exit 1
-fi
+[ "$1" == "" ] \
+	&& echo "Usage: $0 [dry-build/switch/boot/home] [hostname(optional)] [...]" \
+	&& exit 1
 
-WORKDIR="/tmp/$UID-n1x0s"
+WORKDIR="/tmp/$USER-n1x0s"
 RUNME="sudo nixos-rebuild"
+ACTION=$1
+TARGET=${2:-$(hostname)}
 
-if [ "$EUID" -eq 0 ] || [ "$1" == "dry-build" ]
-then
-	RUNME=nixos-rebuild
-fi
+[ -d "$WORKDIR" ] \
+	&& echo "Please remove $WORKDIR first" \
+	&& exit 1
 
-if [ -f "$WORKDIR" ]
-then
-	echo "Please remove $WORKDIR first"
-	exit 1
-fi
+[ "$EUID" -eq 0 ] || [ "$1" == "dry-build" ] \
+	&& RUNME=nixos-rebuild
+
+[ "$ACTION" == "home" ] \
+	&& ACTION="switch" \
+	&& RUNME="home-manager" \
+	&& TARGET="$USER@$TARGET"
 
 install -d -m 700 "$WORKDIR"
 cp -r hosts modules nixos options overlays pkgs resources flake.lock flake.nix \
 	"$WORKDIR"
 
-$RUNME --flake "$WORKDIR#${2:-$(hostname)}" -L "$1"
+$RUNME -L --flake "$WORKDIR#$TARGET" "$ACTION" "${@:3}"
 
 rm -rf "$WORKDIR"
