@@ -13,7 +13,7 @@ in
       systemd.units.sshd.wantedBy = lib.mkForce [ ];
     })
 
-    ({
+    {
       services.openssh = {
         enable = true;
 
@@ -22,12 +22,12 @@ in
 
         settings = {
           AllowUsers = [ "${sigmaUser}" ];
-          PasswordAuthentication = true;
+          PasswordAuthentication = cfg.home;
           PermitRootLogin = lib.mkDefault "no";
           UseDns = true;
           X11Forwarding = false;
         };
       };
-    })
+    }
   ];
 }

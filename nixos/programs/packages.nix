@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  lsDir,
   ...
 }:
 let
@@ -12,8 +11,6 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      # Compilers
-      gcc
       # Download files from network
       wget
       curl

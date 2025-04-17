@@ -1,8 +1,6 @@
 {
   modulesPath,
-  lib,
   pkgs,
-  sigmaUser,
   lsDir,
   ...
 }:
