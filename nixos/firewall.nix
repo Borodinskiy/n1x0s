@@ -15,7 +15,7 @@
       22000
       21027 # Syncthing
       25565 # Minecraft server
-      16261 # project zomboid
+      16261 # Project zomboid
     ];
   };
 }

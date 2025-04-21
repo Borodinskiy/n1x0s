@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.module.include.binaryCache;
+  cfg = config.module.include.binaryCacheServer;
 in
 {
   config = lib.mkIf cfg {

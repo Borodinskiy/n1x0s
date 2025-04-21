@@ -9,20 +9,31 @@ let
 in
 {
   config = lib.mkIf cfg {
-    environment.systemPackages = with pkgs; [
-      obs-studio
-    ];
-    boot = {
-      extraModulePackages = with config.boot.kernelPackages; [
-        v4l2loopback
+    programs.obs-studio = {
+      enable = true;
+      enableVirtualCamera = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        waveform
+        obs-vkcapture
+        obs-vintage-filter
+        obs-vaapi
+        obs-transition-table
+        obs-source-switcher
+        obs-source-clone
+        obs-shaderfilter
+        obs-rgb-levels-filter
+        obs-replay-source
+        obs-pipewire-audio-capture
+        obs-move-transition
+        obs-gstreamer
+        obs-composite-blur
+        obs-backgroundremoval
+        obs-3d-effect
+        advanced-scene-switcher
       ];
-      kernelModules = [ "v4l2loopback" ];
-      # Support for virtual camera and gphoto2 protocol
-      extraModprobeConfig = ''
-        options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam, Virt Cam" exclusive_caps=1
-      '';
     };
-
-    security.polkit.enable = true;
   };
 }

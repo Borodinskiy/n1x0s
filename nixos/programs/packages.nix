@@ -99,7 +99,10 @@ in
       # Work with 3D cloud
       cloudcompare
       # 3D modeling software
-      (pkgs.blender.override { cudaSupport = config.module.driver.gpu.nvidia; })
+      (pkgs.blender.override {
+        cudaSupport = config.module.driver.gpu.nvidia.cuda;
+        hipSupport = config.module.driver.gpu.amd.rocm;
+      })
     ]
 
     ++ lib.optionals group.surf [
@@ -117,6 +120,7 @@ in
       obsidian
       # For calls
       telegram-desktop
+      discord
     ]
 
     # Helper tools for wayland compositors";

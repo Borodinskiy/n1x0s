@@ -38,7 +38,7 @@ in
 
     windowsDualboot = lib.mkEnableOption "extra options when do a dualboot with windows";
 
-    binaryCache = lib.mkEnableOption "binary cache serving on 80 port";
+    binaryCacheServer = lib.mkEnableOption "binary cache server for sharing builded nix packages with other machines";
 
   };
 }

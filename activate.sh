@@ -21,6 +21,7 @@ TARGET=${2:-$(hostname)}
 	&& RUNME="home-manager" \
 	&& TARGET="$USER@$TARGET"
 
+cd "$(dirname "$0")" || exit 1
 install -d -m 700 "$WORKDIR"
 cp -r hosts modules nixos options overlays pkgs resources flake.lock flake.nix \
 	"$WORKDIR"

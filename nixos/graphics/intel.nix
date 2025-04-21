@@ -9,7 +9,7 @@ let
 in
 {
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "intel" ];
 
     hardware.graphics = {

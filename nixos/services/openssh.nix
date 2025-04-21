@@ -9,8 +9,9 @@ let
 in
 {
   config = lib.mkMerge [
+    # Disable service autostart on home machines
     (lib.mkIf cfg.home {
-      systemd.units.sshd.wantedBy = lib.mkForce [ ];
+      systemd.services.sshd.wantedBy = lib.mkForce [ ];
     })
 
     {

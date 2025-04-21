@@ -24,6 +24,18 @@ in
       verbose = false;
     };
 
+    # Some hardening
+    kernel.sysctl = {
+      "fs.suid_dumpable" = 0;
+      "fs.protected_fifos" = 2;
+      "fs.protected_regular" = 2;
+      "kernel.kptr_restrict" = 2;
+      "kernel.kexec_load_disabled" = 1;
+      "kernel.yama.ptrace_scope" = 3;
+      "net.ipv4.tcp_syncookies" = false;
+      "vm.swappiness" = 23;
+    };
+
     # Disable on screen logging for cleaner boot
     # We can temporary enable it again in the bootloader menu
     consoleLogLevel = 0;
@@ -37,7 +49,7 @@ in
       "rd.udev.log_level=3"
       "udev.log_priority=3"
     ];
-    # Keeps /tmp content only in ram
+    # Mounts /tmp in ram
     # Potentially can be a problem for huge nix config in future
     # Or when you have 5KiB of ram
     tmp.useTmpfs = lib.mkDefault (!purp.server);

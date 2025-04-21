@@ -35,7 +35,7 @@
       resourcePath = ./resources;
 
       # Default user, that will be used in most config places
-      sigmaUser = "borodinskiy";
+      sigmaUser = "user";
       sigmaUid = 1337;
       sigmaUidStr = builtins.toString sigmaUid;
 

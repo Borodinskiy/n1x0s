@@ -45,16 +45,10 @@
       # Printer
       "samsung-UnifiedLinuxDriver"
       "canon-cups-ufr2"
-      # Network software
-      "ngrok"
-      # Virtualization
-      "vmware-workstation"
-      # MCPen
+      # Yes
       "discord"
-      # For cuda support
+      # For cuda/rocm support
       "blender"
-      # AI marketplace oss
-      "lmstudio"
       # Network analysis and request edit tool for web
       "burpsuite"
     ];

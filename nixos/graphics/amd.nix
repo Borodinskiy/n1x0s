@@ -9,15 +9,18 @@ let
 in
 {
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "amdgpu" ];
 
     hardware.graphics = {
       enable = true;
-      extraPackages = with pkgs; [
-        amdvlk
-        rocmPackages.clr.icd
-      ];
+      extraPackages =
+        with pkgs;
+        [
+          amdvlk
+        ]
+        ++ lib.optionals cfg.rocm [ rocmPackages.clr.icd ];
+
       extraPackages32 = with pkgs; [
         driversi686Linux.amdvlk
       ];
@@ -27,8 +30,20 @@ in
       nvtopPackages.amd
     ];
 
-    systemd.tmpfiles.rules = [
-      "L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
-    ];
+    # Fix for software that uses hadr-coded HIP libraries
+    systemd.tmpfiles.rules =
+      let
+        rocmEnv = pkgs.symlinkJoin {
+          name = "rocm-combined";
+          paths = with pkgs.rocmPackages; [
+            rocblas
+            hipblas
+            clr
+          ];
+        };
+      in
+      lib.mkIf cfg.rocm [
+        "L+ /opt/rocm - - - - ${rocmEnv}"
+      ];
   };
 }

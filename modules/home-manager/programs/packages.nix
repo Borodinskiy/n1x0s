@@ -2,7 +2,6 @@
   pkgs,
   config,
   lib,
-  lsDir,
   ...
 }:
 let
@@ -43,7 +42,7 @@ in
       gamescope
       # Windows !emulator
       wineWowPackages.staging
-      winetricks
+      unstable.winetricks
       # Extract images from .ico/.exe files using icotool/wrestool
       icoutils
 

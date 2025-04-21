@@ -1,8 +1,16 @@
 { lib, ... }:
 {
   options.module.driver.gpu = {
-    amd = lib.mkEnableOption "amd things";
-    nvidia = lib.mkEnableOption "nvidia things";
-    intel = lib.mkEnableOption "intel things";
+    amd = {
+      enable = lib.mkEnableOption "amd things";
+      rocm = lib.mkEnableOption "amd ROCm toolkit and libraries";
+    };
+
+    nvidia = {
+      enable = lib.mkEnableOption "nvidia things";
+      cuda = lib.mkEnableOption "nvidia CUDA toolkit and libraries";
+    };
+
+    intel.enable = lib.mkEnableOption "intel things";
   };
 }

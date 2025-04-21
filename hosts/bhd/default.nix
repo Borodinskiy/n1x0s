@@ -7,7 +7,10 @@
   module = {
     purpose.home = true;
 
-    driver.gpu.nvidia = true;
+    driver.gpu.nvidia = {
+      enable = true;
+      cuda = true;
+    };
 
     include.windowsDualboot = true;
 
