@@ -14,7 +14,7 @@ TARGET=${2:-$(hostname)}
 	&& exit 1
 
 [ "$EUID" -eq 0 ] || [ "$1" == "dry-build" ] \
-	&& RUNME=nixos-rebuild
+	&& RUNME="nixos-rebuild"
 
 [ "$ACTION" == "home" ] \
 	&& ACTION="switch" \

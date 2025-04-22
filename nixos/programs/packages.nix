@@ -82,6 +82,8 @@ in
       metasploit
       dirb
       gobuster
+      crunch # Wordlist generator
+      hashcat # Hash bruteforce
     ]
 
     ++ lib.optionals group.redactor [

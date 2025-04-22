@@ -1,5 +1,4 @@
 {
-  sigmaUser,
   config,
   lib,
   modulesPath,

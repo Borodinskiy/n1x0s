@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -13,6 +14,10 @@ in
       default = "saved";
       device = "nodev";
       efiSupport = true;
+
+      splashImage = null;
+      backgroundColor = "#000000";
+      theme = "${pkgs.n1x0s-grub}";
     };
   };
 
