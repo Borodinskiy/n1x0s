@@ -9,6 +9,8 @@
 
     driver.gpu.amd.enable = true;
 
+    include.windowsDualboot = true;
+
     de.plasma.enable = true;
   };
 }

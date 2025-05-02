@@ -6,6 +6,7 @@
 }:
 let
   purp = config.module.purpose;
+  include = config.module.include;
 in
 {
   boot.loader = {
@@ -14,6 +15,7 @@ in
       default = "saved";
       device = "nodev";
       efiSupport = true;
+      useOSProber = include.windowsDualboot;
 
       splashImage = null;
       backgroundColor = "#000000";
@@ -36,7 +38,7 @@ in
       "fs.protected_regular" = 2;
       "kernel.kptr_restrict" = 2;
       "kernel.kexec_load_disabled" = 1;
-      "kernel.yama.ptrace_scope" = 3;
+      "kernel.yama.ptrace_scope" = 2;
       "net.ipv4.tcp_syncookies" = false;
       "vm.swappiness" = 23;
     };

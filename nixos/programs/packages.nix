@@ -61,7 +61,7 @@ in
     ]
 
     ++ lib.optionals group.office [
-      libreoffice-still
+      unstable.libreoffice-fresh # FIXME: remove unstable after 25.05
       hunspell
       hunspellDicts.ru-ru
       hunspellDicts.uk-ua
@@ -70,18 +70,22 @@ in
 
     ++ lib.optionals group.pentest [
       nmap
+
       ettercap # Sniffer for MiTM
       p0f # Passive network analysis and fingerprinting tool
       wireshark
       tcpdump
       ghidra
+      jadx
+
       binwalk
       steghide
       stegseek # steganography files
+
       burpsuite # Network requests editor
-      metasploit
-      dirb
+      dirb # Sites directory scanning
       gobuster
+
       crunch # Wordlist generator
       hashcat # Hash bruteforce
     ]
@@ -98,8 +102,6 @@ in
       glaxnimate
       # Audio render
       audacity
-      # Work with 3D cloud
-      cloudcompare
       # 3D modeling software
       (pkgs.blender.override {
         cudaSupport = config.module.driver.gpu.nvidia.cuda;
@@ -125,7 +127,7 @@ in
       discord
     ]
 
-    # Helper tools for wayland compositors";
+    # Helper tools for wayland compositors
     ++ lib.optionals group.wmTools [
       # Idle daemon & lockscreen
       swayidle

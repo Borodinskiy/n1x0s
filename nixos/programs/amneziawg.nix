@@ -5,9 +5,8 @@
   ...
 }:
 let
-  # FIXME: no need for amneziawg-tools-custom after 25.05
-  inherit (pkgs) amneziawg-tools-custom amneziawg-go;
-  awgCmd = arg: "sudo " + lib.getExe' amneziawg-tools-custom "awg-quick" + " ${arg} warp";
+  inherit (pkgs) amneziawg-tools amneziawg-go;
+  awgCmd = arg: "sudo " + lib.getExe' amneziawg-tools "awg-quick" + " ${arg} warp";
 
   cfg = config.module.programs.amneziawg;
   include = config.module.include;
@@ -30,7 +29,7 @@ in
     (lib.mkIf cfg.enable {
       boot.extraModulePackages = with config.boot.kernelPackages; [ amneziawg ];
       environment.systemPackages = [
-        amneziawg-tools-custom
+        amneziawg-tools
         amneziawg-go
       ];
     })

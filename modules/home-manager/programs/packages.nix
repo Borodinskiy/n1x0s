@@ -10,8 +10,7 @@ in
 {
   home.packages =
     with pkgs;
-    [ ]
-    ++ lib.optionals group.develop [
+    lib.optionals group.develop [
       # Cli utility for getting info about mediafiles
       mediainfo
       # Download videos from url
@@ -41,8 +40,8 @@ in
       # Compositor in a window
       gamescope
       # Windows !emulator
-      wineWowPackages.staging
-      unstable.winetricks
+      #wineWowPackages.staging
+      #unstable.winetricks
       # Extract images from .ico/.exe files using icotool/wrestool
       icoutils
 
@@ -56,18 +55,18 @@ in
         ];
       })
       # Playstation
-      duckstation
+      #duckstation
       # Playstation 2
-      pcsx2
+      #pcsx2
       # Gamecube/Wii
-      dolphin-emu
+      #dolphin-emu
     ]
 
     ++ lib.optionals group.surf [
       # Vibrowser
       qutebrowser
       # Private chat
-      simplex-chat-desktop
+      #simplex-chat-desktop
       # Voice client
       mumble
       # Shazam music recognition frontend

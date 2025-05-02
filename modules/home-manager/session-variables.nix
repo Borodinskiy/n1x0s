@@ -29,7 +29,7 @@ in
     # Prioritize wayland for graphical toolkits
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     CLUTTER_BACKEND = "wayland";
-    GDK_BAKEND = "wayland,x11";
+    GDK_BACKEND = "wayland,x11";
     QT_QPA_PLATFORM = "wayland;xcb";
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };

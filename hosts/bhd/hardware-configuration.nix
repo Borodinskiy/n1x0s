@@ -13,7 +13,6 @@
   boot = {
     loader = {
       efi.efiSysMountPoint = "/efi";
-      grub.useOSProber = true;
     };
     supportedFilesystems = [ "ntfs" ];
     initrd.availableKernelModules = [

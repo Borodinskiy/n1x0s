@@ -23,7 +23,7 @@ TARGET=${2:-$(hostname)}
 
 cd "$(dirname "$0")" || exit 1
 install -d -m 700 "$WORKDIR"
-cp -r hosts modules nixos options overlays pkgs resources flake.lock flake.nix \
+cp -r hosts modules nixos options overlays packages resources flake.lock flake.nix \
 	"$WORKDIR"
 
 $RUNME -L --flake "$WORKDIR#$TARGET" "$ACTION" "${@:3}"

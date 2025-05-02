@@ -10,7 +10,7 @@
   };
 
   nixpkgs.overlays = [
-    outputs.overlays.additions
+    outputs.overlays.custom
     outputs.overlays.unstable
   ];
 }
