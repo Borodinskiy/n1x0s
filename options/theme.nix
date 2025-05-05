@@ -6,12 +6,20 @@
 }:
 {
   options.module.theme = {
+    package = lib.mkOption { default = pkgs.kdePackages.breeze-gtk; };
+    name = lib.mkOption { default = "Breeze-Dark"; };
+
+    iconTheme = {
+      package = lib.mkOption { default = pkgs.kdePackages.breeze-icons; };
+      name = lib.mkOption { default = "breeze-dark"; };
+    };
+
     cursor = {
-      package = lib.mkOption { default = pkgs.kdePackages.breeze; };
+      package = lib.mkOption { default = pkgs.material-cursors; };
 
-      name = lib.mkOption { default = "Breeze_Light"; };
+      name = lib.mkOption { default = "material_cursors"; };
 
-      size = lib.mkOption { default = 36; };
+      size = lib.mkOption { default = 32; };
 
       sizeStr = lib.mkOption { default = builtins.toString config.module.theme.cursor.size; };
     };

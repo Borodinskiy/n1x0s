@@ -2,7 +2,7 @@
 {
   imports =
     lsDir ./.
-    ++ lsDir ./desktop-environment
+    ++ lsDir ./desktop
     ++ lsDir ./graphics
     ++ lsDir ./network-drivers
     ++ lsDir ./programs

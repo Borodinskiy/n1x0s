@@ -5,12 +5,11 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
-      # Fix kde's xdg portal menus application demencia
-      XDG_MENU_PREFIX = "sway-";
       # For icc colorprofiles support
       # TODO: Check when this will became stable
       #WLR_RENDERER="vulkan";
     };
+    # Fix kde's xdg portal menus application demencia (in dolphin as an example)
     home.activation.linkKdeMenusToSway = # bash
       ''
         link() {
@@ -21,10 +20,9 @@ in
             run ln -sf "$in" "$out"
           fi
         }
-        # Bullshit for proper dolphin file manager sway support
         link \
           /run/current-system/sw/etc/xdg/menus/plasma-applications.menu \
-          ~/.config/menus/sway-applications.menu
+          ~/.config/menus/applications.menu
       '';
   };
 }

@@ -48,6 +48,8 @@ in
       pciutils
       # Boot management
       efibootmgr
+      # File manager
+      yazi
     ]
 
     ++ lib.optionals group.develop [
@@ -61,7 +63,7 @@ in
     ]
 
     ++ lib.optionals group.office [
-      unstable.libreoffice-fresh # FIXME: remove unstable after 25.05
+      libreoffice-still
       hunspell
       hunspellDicts.ru-ru
       hunspellDicts.uk-ua
@@ -129,14 +131,11 @@ in
 
     # Helper tools for wayland compositors
     ++ lib.optionals group.wmTools [
-      # Idle daemon & lockscreen
-      swayidle
-      swaylock
       # Applications menu
       wofi
       # Notification daemon
       mako
-      # Sound and brightness cli
+      # cli
       pamixer
       playerctl
       # GUI for sound mixer

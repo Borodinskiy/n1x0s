@@ -4,8 +4,8 @@
   stdenvNoCC,
   themeConfig ? null,
 }:
-stdenvNoCC.mkDerivation rec {
-  pname = "sddm-custom-bg";
+stdenvNoCC.mkDerivation {
+  pname = "n1x0s-sddm";
   version = "1.0";
 
   src = ./src;
@@ -21,7 +21,7 @@ stdenvNoCC.mkDerivation rec {
       iniFormat = pkgs.formats.ini { };
       configFile = iniFormat.generate "" { General = themeConfig; };
 
-      basePath = "$out/share/sddm/themes/sddm-custom-bg";
+      basePath = "$out/share/sddm/themes/n1x0s-sddm";
     in
     ''
       mkdir -p ${basePath}

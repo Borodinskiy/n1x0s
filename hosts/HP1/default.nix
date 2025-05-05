@@ -11,6 +11,9 @@
 
     include.windowsDualboot = true;
 
-    de.plasma.enable = true;
+    de = {
+      plasma.enable = true;
+      sway.enable = true;
+    };
   };
 }
