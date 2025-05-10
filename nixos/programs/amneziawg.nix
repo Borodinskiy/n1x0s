@@ -28,6 +28,8 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       boot.extraModulePackages = with config.boot.kernelPackages; [ amneziawg ];
+      # awg-quick uses resolveconf when creating interface
+      services.resolved.enable = true;
       environment.systemPackages = [
         amneziawg-tools
         amneziawg-go
