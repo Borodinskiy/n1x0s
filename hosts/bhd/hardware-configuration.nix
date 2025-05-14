@@ -49,12 +49,12 @@
     in
     {
       "/" = {
-        device = "/dev/disk/by-uuid/8b915372-6eb3-4b67-97ff-5e666d01434c";
+        device = "/dev/disk/by-uuid/ef56e1c4-16cd-4998-bf23-c53fe41412d1";
         fsType = "ext4";
         options = fsoptionsLin;
       };
       "/efi" = {
-        device = "/dev/disk/by-uuid/F2AE-D541";
+        device = "/dev/disk/by-uuid/7F38-D49E";
         fsType = "vfat";
         options = [
           "fmask=0022"
@@ -66,24 +66,14 @@
         fsType = "ntfs3";
         options = fsoptionsHDD;
       };
-      "/run/media/${sigmaUser}/drive_g" = {
-        device = "/dev/disk/by-uuid/54E4EE59E4EE3D3C";
-        fsType = "ntfs3";
-        options = fsoptionsSSD;
-      };
       "/run/media/${sigmaUser}/drive_p" = {
-        device = "/dev/disk/by-uuid/262CBC932CBC600B";
+        device = "/dev/disk/by-uuid/0EAEE44AAEE42C41";
         fsType = "ntfs3";
         options = fsoptionsSSD;
       };
     };
 
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 8 * 1024;
-    }
-  ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/6eea38ad-bfb2-4ae3-ba3c-12a6164217c5"; } ];
 
   networking.useDHCP = lib.mkDefault true;
 
@@ -92,5 +82,5 @@
 
   # Read context from link before changing value
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

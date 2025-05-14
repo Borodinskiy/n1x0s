@@ -127,6 +127,7 @@ in
       # For calls
       telegram-desktop
       discord
+      simplex-chat-desktop
     ]
 
     # Helper tools for wayland compositors

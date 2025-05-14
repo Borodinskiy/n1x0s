@@ -50,11 +50,9 @@ in
       ];
 
       environment.systemPackages = with pkgs // pkgs.kdePackages; [
+        # Support of windows wallpaper animated program
+        wallpaper-engine-plugin
         xdg-desktop-portal-gtk
-        # QT additional libraries
-        qtdeclarative
-        qtimageformats
-        qtmultimedia
       ];
     })
   ];
