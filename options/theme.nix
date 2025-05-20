@@ -30,9 +30,9 @@
 
         name = lib.mkOption { default = "Noto Sans"; };
 
-        size = lib.mkOption { default = 12; };
+        size = lib.mkOption { default = 10; };
 
-        sizeSwaylock = lib.mkOption { default = 14.0; };
+        sizeSwaylock = lib.mkOption { default = 10.0; };
       };
 
       mono = {
@@ -40,9 +40,9 @@
 
         name = lib.mkOption { default = "Hack"; };
 
-        size = lib.mkOption { default = 12; };
+        size = lib.mkOption { default = 10; };
 
-        sizeSway = lib.mkOption { default = 12.0; };
+        sizeSway = lib.mkOption { default = 10.0; };
       };
     };
   };

@@ -62,6 +62,13 @@ in
       #dolphin-emu
     ]
 
+    ++ lib.optionals group.texlive [
+      # All pacakges :/ 4GiB+
+      texlive.combined.scheme-full
+      # .text file formatter
+      tex-fmt
+    ]
+
     ++ lib.optionals group.surf [
       # Vibrowser
       qutebrowser

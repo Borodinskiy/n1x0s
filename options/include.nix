@@ -19,6 +19,7 @@ in
     office = lib.mkEnableOption "software for work with documents" // {
       default = cfg.common || purp.home;
     };
+    texlive = lib.mkEnableOption "texlive metapackage and utilities";
     pentest = lib.mkEnableOption "utilities for penetration testing and ctf" // {
       default = cfg.common || purp.home;
     };
