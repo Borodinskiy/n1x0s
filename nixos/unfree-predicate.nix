@@ -44,6 +44,7 @@
       "obsidian"
       # Printer
       "samsung-UnifiedLinuxDriver"
+      "samsung-unified-linux-driver"
       "canon-cups-ufr2"
       # Yes
       "discord"

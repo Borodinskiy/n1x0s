@@ -37,6 +37,7 @@
 
       mono = {
         package = lib.mkOption { default = pkgs.hack-font; };
+        packageNerd = lib.mkOption { default = pkgs.nerd-fonts.hack; };
 
         name = lib.mkOption { default = "Hack"; };
 

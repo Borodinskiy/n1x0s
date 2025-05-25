@@ -3,11 +3,11 @@
 
   inputs = {
     # Main repository with packages
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Utility for managing home directory via nix
-    home-manager.url = "github:nix-community/home-manager?ref=release-24.11";
+    home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
     # Automatic disk razmetka (for server)
     disko.url = "github:nix-community/disko";
 

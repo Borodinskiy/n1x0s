@@ -159,23 +159,4 @@ in
       # GUI for display management in wlroots-like compositors
       wdisplays
     ];
-
-  fonts.packages =
-    with pkgs;
-    lib.optionals group.fonts [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      comic-mono
-      (nerdfonts.override {
-        fonts = [
-          "NerdFontsSymbolsOnly"
-          config.module.theme.font.mono.name
-        ];
-      })
-      # MS .docx compatibility
-      corefonts
-      vistafonts
-    ];
 }
