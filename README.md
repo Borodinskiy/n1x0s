@@ -4,10 +4,10 @@
 
 Flake based configuration for NixOS \
 Inputs:
-- Nixpkgs stable
-- Nixpkgs unstable
-- Home-manager module
-- Disko module
+- stable nixpkgs
+- unstable nixpkgs
+- default nixpkgs version (currently unstable)
+- disko module
 
 ## Structure
 
