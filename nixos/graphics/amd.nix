@@ -19,7 +19,7 @@ in
         [
           amdvlk
         ]
-        ++ lib.optionals cfg.rocm [ rocmPackages.clr.icd ];
+        ++ lib.optionals cfg.rocm.enable [ rocmPackages.clr.icd ];
 
       extraPackages32 = with pkgs; [
         driversi686Linux.amdvlk
@@ -42,7 +42,7 @@ in
           ];
         };
       in
-      lib.mkIf cfg.rocm [
+      lib.mkIf cfg.rocm.enable [
         "L+ /opt/rocm - - - - ${rocmEnv}"
       ];
   };

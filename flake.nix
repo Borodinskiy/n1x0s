@@ -2,17 +2,17 @@
   description = "Sigma NIXOS configuration (c) LigmaBalls";
 
   inputs = {
-    # Main repository with packages
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # Main repositories with packages
+    stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Utility for managing home directory via nix
-    home-manager.url = "github:nix-community/home-manager?ref=release-25.05";
-    # Automatic disk razmetka (for server)
+    # Default nixpkgs version
+    nixpkgs.follows = "unstable";
+
+    # Declarative disk partitioning (for server)
     disko.url = "github:nix-community/disko";
 
-    # Modules have it's own nixpkgs input. Syncing its with our's
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -32,9 +32,10 @@
       # Alias for function that generate attrs for systems that defined in variable above
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      resourcePath = ./resources;
+      # Where located files that could be used in configuration
+      resourcePath = ./assets;
 
-      # Default user, that will be used in most config places
+      # Default user, that will be used in most configuration places
       sigmaUser = "user";
       sigmaUid = 1337;
       sigmaUidStr = builtins.toString sigmaUid;
@@ -63,11 +64,6 @@
         inputs.disko.nixosModules.disko
       ];
 
-      defaultForModule = moduleName: [
-        ./options
-        ./modules/${moduleName}
-      ];
-
       specialArgs = {
         inherit
           inputs
@@ -90,14 +86,6 @@
           modules = defaultNixos ++ extraModules ++ [ ./hosts/${hostname} ];
         };
 
-      homeManager =
-        hostname:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = specialArgs;
-          modules = (defaultForModule "home-manager") ++ [ ./hosts/${hostname}/home-manager ];
-        };
-
       hostLaptop = "HP1";
       hostPc = "bhd";
 
@@ -109,19 +97,13 @@
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
-        "${hostLaptop}" = nixosSystem { hostname = "${hostLaptop}"; }; # laptop
-        "${hostPc}" = nixosSystem { hostname = "${hostPc}"; }; # pc
+        "${hostLaptop}" = nixosSystem { hostname = "${hostLaptop}"; };
+        "${hostPc}" = nixosSystem { hostname = "${hostPc}"; };
 
-        # hostServer
         "${hostServer}" = nixosSystem {
           hostname = "${hostServer}";
           extraModules = nixosServer;
         };
-      };
-
-      homeConfigurations = {
-        "${sigmaUser}@${hostLaptop}" = homeManager "${hostLaptop}"; # Laptop
-        "${sigmaUser}@${hostPc}" = homeManager "${hostPc}"; # hostPc
       };
     };
 }

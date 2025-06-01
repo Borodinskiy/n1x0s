@@ -25,7 +25,7 @@ in
         obs-source-switcher
         obs-source-clone
         obs-shaderfilter
-        obs-rgb-levels-filter
+        obs-rgb-levels
         obs-replay-source
         obs-pipewire-audio-capture
         obs-move-transition

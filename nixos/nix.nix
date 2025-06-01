@@ -1,4 +1,4 @@
-{ outputs, ... }:
+{ config, outputs, ... }:
 {
   nix = {
     channel.enable = false;
@@ -9,8 +9,12 @@
     ];
   };
 
-  nixpkgs.overlays = [
-    outputs.overlays.custom
-    outputs.overlays.unstable
-  ];
+  nixpkgs = {
+    config.cudaSupport = config.module.driver.gpu.nvidia.cuda.enable;
+    config.hipSupport = config.module.driver.amd.rocm.enable;
+    overlays = [
+      outputs.overlays.custom
+      outputs.overlays.unstable
+    ];
+  };
 }

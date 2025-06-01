@@ -57,13 +57,76 @@ in
       okteta
       godot_4
       vscodium
+      # Locale generation utilities
+      gettext
+
+      # Cli utility for getting info about mediafiles
+      mediainfo
+      # Download videos from url
+      yt-dlp
+      # Adb/fastboot for android device debugging, removing shit, reinstalling shindows and removing [company] software
+      android-tools
+      # Dependency of Lazy nvim plugin manager
+      lua5_1
+      lua51Packages.luarocks
+      # Clipboard support for wayland
+      wl-clipboard
+      cliphist
+      # Language servers
+
+      # Lua
+      lua-language-server
+      # Bash
+      bash-language-server
+      # Nix
+      nixd
+      nixfmt-rfc-style
+      # Css/json/... extracted from vscode
+      vscode-langservers-extracted
     ]
 
     ++ lib.optionals group.gaming [
+      # Compositor in a window
+      gamescope
+      # MSI Afterburner 2
+      mangohud
+      # Windows !emulator
+      wineWowPackages.staging
+      unstable.winetricks
+      # Extract images from .ico/.exe files using icotool/wrestool
+      icoutils
+      # Manage custom steam Proton versions
+      protonup
+
+      # Minecraft
+      #portablemc atlauncher
+      (prismlauncher.override {
+        jdks = [
+          jdk8
+          jdk17
+          jdk
+        ];
+      })
+      # Playstation
+      #duckstation
+      # Playstation 2
+      #pcsx2
+      # Gamecube/Wii
+      #dolphin-emu
+    ]
+
+    ++ lib.optionals group.texlive [
+      # All packages :/ 4GiB+
+      texlive.combined.scheme-full
+      # .text file formatter
+      tex-fmt
     ]
 
     ++ lib.optionals group.office [
       libreoffice-still
+      # Text hyphenation library
+      hyphen
+      # Language dictionary
       hunspell
       hunspellDicts.ru-ru
       hunspellDicts.uk-ua
@@ -105,21 +168,27 @@ in
       # Audio render
       audacity
       # 3D modeling software
-      (pkgs.blender.override {
-        cudaSupport = config.module.driver.gpu.nvidia.cuda;
-        hipSupport = config.module.driver.gpu.amd.rocm;
-      })
+      blender
     ]
 
     ++ lib.optionals group.surf [
       # Calculator
       speedcrunch
       # Media players
-      mpv
+      (mpv-unwrapped.wrapper {
+        scripts = with pkgs.mpvScripts; [
+          # Media player support in desktop environments
+          mpris
+        ];
+        mpv = pkgs.mpv-unwrapped.override {
+          waylandSupport = true;
+        };
+      })
       vlc
       # Browsers
       tor-browser
       librewolf
+      qutebrowser
       # BitTorrent
       qbittorrent
       # Notes
@@ -128,6 +197,11 @@ in
       telegram-desktop
       discord
       simplex-chat-desktop
+      # Private chat
+      # Voice client
+      mumble
+      # Shazam music recognition frontend
+      songrec
     ]
 
     # Helper tools for wayland compositors

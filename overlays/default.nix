@@ -3,7 +3,7 @@
   custom = final: _prev: import ../packages final.pkgs;
 
   unstable = final: _prev: {
-    unstable = import inputs.nixpkgs-unstable {
+    unstable = import inputs.unstable {
       system = final.system;
     };
   };
