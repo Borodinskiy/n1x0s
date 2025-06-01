@@ -14,17 +14,17 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    
+
     mkdir -p "$out/share/wayland-sessions"
 
     cat << EOF > "$out/share/wayland-sessions/n1x0s-${name}.desktop"
-[Desktop Entry]
-Name=${name}
-Comment=Custom n1x0s session
-Exec=${command}
-TryExec=${command}
-Type=Application
-EOF
+    [Desktop Entry]
+    Name=${name}
+    Comment=Custom n1x0s session
+    Exec=${command}
+    TryExec=${command}
+    Type=Application
+    EOF
 
     runHook postInstall
   '';

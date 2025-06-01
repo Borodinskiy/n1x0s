@@ -24,6 +24,7 @@ in
   };
 
   boot = {
+    kernelPackages = pkgs.linuxPackages_6_6;
     # Configuration for base root filesystem (ramdisk)
     # Kernel gets initial tools here that needed to mount system disk partitions
     initrd = {

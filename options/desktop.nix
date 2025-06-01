@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.module;
-in {
+in
+{
   options.module.de = {
     plasma = {
       enable = lib.mkEnableOption "kde plasma";

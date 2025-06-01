@@ -10,7 +10,7 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    
+
     mkdir -p "$out/"
     cp -r $src/* "$out/"
 

@@ -22,4 +22,4 @@ in
       corefonts
       vistafonts
     ];
-  }
+}

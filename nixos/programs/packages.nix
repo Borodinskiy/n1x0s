@@ -14,6 +14,7 @@ in
       # Download files from network
       wget
       curl
+
       # Private network tools
       tor
       obfs4
@@ -21,112 +22,81 @@ in
       proxychains
       wireguard-tools
       openvpn
+
       # Searching
       ripgrep
       fd
-      # Disk usage analysis
-      ncdu
-      # Common Internet File System support
-      cifs-utils
-      # Version control system
-      git
+
+      ncdu # Disk usage analysis
+      cifs-utils # Common Internet File System support
+      git # Version control system
+      tmux # Terminal multiplexor
+      btop # Process monitor
+      yazi # Cli file manager
+      efibootmgr # UEFI boot entry management
+
       # Different archive formats
       zip
       unzip
       p7zip
       unar
       lzip
-      # Terminal multiplexor
-      tmux
-      # Process monitor
-      btop
+
       # Process ls
       psmisc
       lsof
+
       # Hardware info utils
       usbutils
       pciutils
-      # Boot management
-      efibootmgr
-      # File manager
-      yazi
     ]
 
     ++ lib.optionals group.develop [
-      # Hex editor
-      okteta
-      godot_4
-      vscodium
-      # Locale generation utilities
-      gettext
+      okteta # Hex editor
+      godot_4 # Game engine
+      vscodium # IDE Browser 229
+      gettext # Locale generation utilities
+      mediainfo # Cli utility for getting info about mediafiles
+      yt-dlp # Download videos from url
+      android-tools # Adb/fastboot for android device debugging, removing shit, reinstalling shindows and removing [company] software
 
-      # Cli utility for getting info about mediafiles
-      mediainfo
-      # Download videos from url
-      yt-dlp
-      # Adb/fastboot for android device debugging, removing shit, reinstalling shindows and removing [company] software
-      android-tools
       # Dependency of Lazy nvim plugin manager
       lua5_1
       lua51Packages.luarocks
+
       # Clipboard support for wayland
       wl-clipboard
       cliphist
-      # Language servers
 
-      # Lua
-      lua-language-server
-      # Bash
-      bash-language-server
-      # Nix
-      nixd
-      nixfmt-rfc-style
-      # Css/json/... extracted from vscode
-      vscode-langservers-extracted
+      # Language servers and etc.
+      lua-language-server # Lua
+      bash-language-server # Bash
+      nixd # Nix
+      nixfmt-rfc-style # Nix code formatter
+      treefmt # Autoformat of code files
+      vscode-langservers-extracted # Css/json/... extracted from vscode
     ]
 
     ++ lib.optionals group.gaming [
-      # Compositor in a window
-      gamescope
-      # MSI Afterburner 2
-      mangohud
-      # Windows !emulator
-      wineWowPackages.staging
-      unstable.winetricks
-      # Extract images from .ico/.exe files using icotool/wrestool
-      icoutils
-      # Manage custom steam Proton versions
-      protonup
-
-      # Minecraft
-      #portablemc atlauncher
-      (prismlauncher.override {
-        jdks = [
-          jdk8
-          jdk17
-          jdk
-        ];
-      })
-      # Playstation
-      #duckstation
-      # Playstation 2
-      #pcsx2
-      # Gamecube/Wii
-      #dolphin-emu
+      gamescope # Compositor in a window
+      mangohud # MSI Afterburner 2
+      wineWowPackages.staging # Windows !emulator
+      unstable.winetricks # Script to install windows DLLs
+      icoutils # Extract images from .ico/.exe files using icotool/wrestool
+      protonup # Manage custom steam Proton versions
+      prismlauncher # Minecraft launcher
     ]
 
     ++ lib.optionals group.texlive [
-      # All packages :/ 4GiB+
-      texlive.combined.scheme-full
-      # .text file formatter
-      tex-fmt
+      texlive.combined.scheme-full # All packages :/ 4GiB+
+      tex-fmt # .text file formatter
     ]
 
     ++ lib.optionals group.office [
       libreoffice-still
-      # Text hyphenation library
-      hyphen
-      # Language dictionary
+      hyphen # Text hyphenation library
+
+      # Language dictionaries and tools
       hunspell
       hunspellDicts.ru-ru
       hunspellDicts.uk-ua
@@ -143,9 +113,10 @@ in
       ghidra
       jadx
 
+      # steganography files
       binwalk
       steghide
-      stegseek # steganography files
+      stegseek
 
       burpsuite # Network requests editor
       dirb # Sites directory scanning
@@ -156,25 +127,33 @@ in
     ]
 
     ++ lib.optionals group.redactor [
-      # Musthave
-      ffmpeg
+      ffmpeg # Musthave
+      audacity # Audio render
+      blender # 3D modeling software
+
       # Image
       krita
       gimp
+
       # Render
       kdePackages.kdenlive
       frei0r
       glaxnimate
-      # Audio render
-      audacity
-      # 3D modeling software
-      blender
     ]
 
     ++ lib.optionals group.surf [
-      # Calculator
-      speedcrunch
+      # Browsers
+      tor-browser
+      librewolf
+      qutebrowser
+      qbittorrent
+
+      speedcrunch # Calculator
+      obsidian # Notes
+      songrec # Shazam music recognition frontend
+
       # Media players
+      vlc
       (mpv-unwrapped.wrapper {
         scripts = with pkgs.mpvScripts; [
           # Media player support in desktop environments
@@ -184,53 +163,41 @@ in
           waylandSupport = true;
         };
       })
-      vlc
-      # Browsers
-      tor-browser
-      librewolf
-      qutebrowser
-      # BitTorrent
-      qbittorrent
-      # Notes
-      obsidian
+
+
       # For calls
       telegram-desktop
       discord
       simplex-chat-desktop
-      # Private chat
-      # Voice client
       mumble
-      # Shazam music recognition frontend
-      songrec
     ]
 
     # Helper tools for wayland compositors
     ++ lib.optionals group.wmTools [
-      # Applications menu
-      wofi
-      # Notification daemon
-      mako
+      wofi # Applications menu
+      mako # Notification daemon
+      waybar # Status bar
+      wdisplays # GUI for display management in wlroots-like compositors
+      hyprpicker # Color picker
+      pavucontrol # GUI for sound mixer
+
       # cli
       pamixer
       playerctl
-      # GUI for sound mixer
-      pavucontrol
+
       # Screenshot tools (screenshooter and area picker)
       grim
       slurp
-      # Color picker
-      hyprpicker
+
       # Clipboard daemon and history storage
       wl-clipboard
       cliphist
-      # Status bar
-      waybar
+
       # Applets
       networkmanagerapplet
+
       # Wallpaper tools
       swaybg
       waypaper
-      # GUI for display management in wlroots-like compositors
-      wdisplays
     ];
 }
