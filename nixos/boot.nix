@@ -24,24 +24,11 @@ in
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_6;
     # Configuration for base root filesystem (ramdisk)
     # Kernel gets initial tools here that needed to mount system disk partitions
     initrd = {
       systemd.enable = true;
       verbose = false;
-    };
-
-    # Some hardening
-    kernel.sysctl = {
-      "fs.suid_dumpable" = 0;
-      "fs.protected_fifos" = 2;
-      "fs.protected_regular" = 2;
-      "kernel.kptr_restrict" = 2;
-      "kernel.kexec_load_disabled" = 1;
-      "kernel.yama.ptrace_scope" = 2;
-      "net.ipv4.tcp_syncookies" = false;
-      "vm.swappiness" = 23;
     };
 
     # Disable on screen logging for cleaner boot

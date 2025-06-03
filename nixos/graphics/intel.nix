@@ -8,7 +8,6 @@ let
   cfg = config.module.driver.gpu.intel;
 in
 {
-
   config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "intel" ];
 

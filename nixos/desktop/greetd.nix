@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.module.dp.greetd;
+  cfg = config.module.dm.greetd;
 in
 {
   config = lib.mkIf cfg.enable {

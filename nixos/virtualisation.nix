@@ -10,10 +10,11 @@ let
 in
 {
   config = lib.mkIf cfg {
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [
-      "${sigmaUser}"
-    ];
+    # FIXME: virtualbox-modules are broken on the newest kernel
+    #virtualisation.virtualbox.host.enable = true;
+    #users.extraGroups.vboxusers.members = [
+    #  "${sigmaUser}"
+    #];
 
     virtualisation.docker.enable = true;
 

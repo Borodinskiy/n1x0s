@@ -41,6 +41,7 @@ in
       programs.kde-pim.enable = false;
 
       environment.plasma6.excludePackages = with pkgs.kdePackages; [
+        konsole
         elisa
         ksystemstats
         khelpcenter

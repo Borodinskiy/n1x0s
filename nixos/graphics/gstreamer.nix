@@ -6,7 +6,6 @@
 }:
 let
   cfg = config.hardware.graphics;
-  lp = "/lib/gstreamer-1.0";
 in
 {
   config = lib.mkIf cfg.enable {

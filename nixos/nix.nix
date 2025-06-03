@@ -15,6 +15,7 @@
     overlays = [
       outputs.overlays.custom
       outputs.overlays.unstable
+      outputs.overlays.fixmes
     ];
   };
 }

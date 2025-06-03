@@ -2,13 +2,13 @@
   pkgs,
   config,
   lib,
+  sigmaUser,
   ...
 }:
 let
   cfg = config.module.driver.gpu.amd;
 in
 {
-
   config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -26,11 +26,13 @@ in
       ];
     };
 
+    programs.corectrl.enable = true;
+    users.groups.corectrl.members = [ sigmaUser ];
     environment.systemPackages = with pkgs; [
       nvtopPackages.amd
     ];
 
-    # Fix for software that uses hadr-coded HIP libraries
+    # Fix for software that uses hard-coded path to HIP libraries
     systemd.tmpfiles.rules =
       let
         rocmEnv = pkgs.symlinkJoin {

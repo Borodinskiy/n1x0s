@@ -52,6 +52,7 @@ in
     ]
 
     ++ lib.optionals group.develop [
+      foot # Terminal
       okteta # Hex editor
       godot_4 # Game engine
       vscodium # IDE Browser 229

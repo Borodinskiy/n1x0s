@@ -10,14 +10,22 @@ in
         default = cfg.de.plasma.enable;
       };
     };
-    gnome.enable = lib.mkEnableOption "gnome desktop environmente";
-    lomiri.enable = lib.mkEnableOption "Lomiri desktop environment";
+
+    gnome = {
+      enable = lib.mkEnableOption "gnome desktop environmente";
+      displayManager.enable = lib.mkEnableOption "gdm" // {
+        default = cfg.de.gnome.enable;
+      };
+    };
+
+    lomiri.enable = lib.mkEnableOption "lomiri desktop environment";
 
     sway.enable = lib.mkEnableOption "sway";
+
     hyprland.enable = lib.mkEnableOption "hyprland";
   };
 
-  options.module.dp = {
+  options.module.dm = {
     greetd.enable = lib.mkEnableOption "greetd display manager";
   };
 }
