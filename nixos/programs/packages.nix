@@ -154,7 +154,6 @@ in
       songrec # Shazam music recognition frontend
 
       # Media players
-      vlc
       (mpv-unwrapped.wrapper {
         scripts = with pkgs.mpvScripts; [
           # Media player support in desktop environments

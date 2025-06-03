@@ -27,5 +27,16 @@
           hash = "sha256-mIjQvc7SRjE1Orb2BkHK+K1TcRQvzj2oUOCUT4DzIuA=";
         };
       });
+
+    # Hides foot server and client desktop entries from application menus in DEs
+    # This version doesn't present in binary cache but don't care because foot compilation takes 5 sec
+    foot = prev.foot.overrideAttrs (old: {
+      postInstall =
+        old.postInstall
+        + ''
+          rm $out/share/applications/foot-server.desktop
+          rm $out/share/applications/footclient.desktop
+        '';
+    });
   };
 }
