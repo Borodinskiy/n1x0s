@@ -164,7 +164,6 @@ in
         };
       })
 
-
       # For calls
       telegram-desktop
       discord

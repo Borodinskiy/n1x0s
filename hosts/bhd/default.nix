@@ -1,4 +1,4 @@
-{ lsDir, ... }:
+{ pkgs, lsDir, ... }:
 {
   networking.hostName = "bhd";
 
@@ -9,11 +9,16 @@
 
     driver.gpu.nvidia = {
       enable = true;
-      cuda = true;
+      cuda.enable = true;
     };
 
     include.windowsDualboot = true;
 
     de.plasma.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    rpcs3
+    pcsx2
+  ];
 }

@@ -4,12 +4,9 @@
 }:
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
-    kernelModules = [ "ntsync" ];
+    kernelPackages = pkgs.linuxPackages_6_6;
+    kernelModules = [ ];
   };
-
-  # Sched-ext
-  services.scx.enable = true;
 
   # Some hardening
   boot.kernel.sysctl = {
