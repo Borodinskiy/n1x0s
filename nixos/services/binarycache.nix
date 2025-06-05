@@ -8,14 +8,7 @@ let
 in
 {
   config = lib.mkIf cfg {
-    services.nix-serve = {
-      enable = true;
-      secretKeyFile = "/var/binarycache/cache-pub-key.pem";
-    };
-
-    nix.settings.secret-key-files = [
-      "/var/binarycache/cache-pub-key.pem"
-    ];
+    services.nix-serve.enable = true;
 
     networking.firewall.allowedTCPPorts = [
       config.services.nginx.defaultHTTPListenPort
