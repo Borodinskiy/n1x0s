@@ -19,24 +19,13 @@
       };
     in
     final: prev: {
-      # FIXME: mpv video decoding not work. Will be fixed after next update of flake inputs
-      mpv-unwrapped = prev.mpv-unwrapped.override {
-        libplacebo = final.libplacebo-mpv;
+      mpv = prev.mpv-unwrapped.wrapper {
+        mpv = prev.mpv-unwrapped;
+        scripts = with prev.mpvScripts; [
+          # Media player support in desktop environments
+          mpris
+        ];
       };
-      libplacebo-mpv =
-        let
-          version = "7.349.0";
-        in
-        prev.libplacebo.overrideAttrs (old: {
-          inherit version;
-          src = prev.fetchFromGitLab {
-            domain = "code.videolan.org";
-            owner = "videolan";
-            repo = "libplacebo";
-            rev = "v${version}";
-            hash = "sha256-mIjQvc7SRjE1Orb2BkHK+K1TcRQvzj2oUOCUT4DzIuA=";
-          };
-        });
 
       # Disable browser (libcef) support because it's lib takes 1.5GiB of useless function in obs for me
       obs-studio = prev.obs-studio.override {

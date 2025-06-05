@@ -154,15 +154,7 @@ in
       songrec # Shazam music recognition frontend
 
       # Media players
-      (mpv-unwrapped.wrapper {
-        scripts = with pkgs.mpvScripts; [
-          # Media player support in desktop environments
-          mpris
-        ];
-        mpv = pkgs.mpv-unwrapped.override {
-          waylandSupport = true;
-        };
-      })
+      mpv
 
       # For calls
       telegram-desktop

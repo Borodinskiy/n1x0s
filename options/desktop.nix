@@ -11,13 +11,6 @@ in
       };
     };
 
-    gnome = {
-      enable = lib.mkEnableOption "gnome desktop environmente";
-      displayManager.enable = lib.mkEnableOption "gdm" // {
-        default = cfg.de.gnome.enable;
-      };
-    };
-
     lomiri.enable = lib.mkEnableOption "lomiri desktop environment";
 
     sway.enable = lib.mkEnableOption "sway";
