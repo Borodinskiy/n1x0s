@@ -12,7 +12,7 @@ in
   config = lib.mkIf cfg {
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vboxusers.members = [
-      "${sigmaUser}"
+      sigmaUser
     ];
 
     virtualisation.docker.enable = true;

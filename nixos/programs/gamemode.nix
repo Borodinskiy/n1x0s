@@ -27,6 +27,6 @@ in
       };
     };
     # Without it gamemode daemon can't apply it's settings on hardware
-    users.extraGroups.gamemode.members = [ "${sigmaUser}" ];
+    users.extraGroups.gamemode.members = [ sigmaUser ];
   };
 }

@@ -17,9 +17,14 @@ in
       liberation_ttf
       comic-mono
       nerd-fonts.symbols-only
-      config.module.theme.font.mono.packageNerd
       # MS .docx compatibility
       corefonts
       vistafonts
-    ];
+    ]
+
+    ++ (with config.module.theme.font; [
+      text.package
+      mono.package
+      mono.packageNerd
+    ]);
 }

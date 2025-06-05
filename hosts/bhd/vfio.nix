@@ -28,7 +28,7 @@
   };
 
   # No auth when launching program
-  users.groups.libvirtd.members = [ "${sigmaUser}" ];
+  users.groups.libvirtd.members = [ sigmaUser ];
 
   boot = {
     initrd.availableKernelModules = [

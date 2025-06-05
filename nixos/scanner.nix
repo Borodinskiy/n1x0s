@@ -11,7 +11,7 @@ in
 {
   config = lib.mkIf cfg {
     hardware.sane.enable = true;
-    users.groups.scanner.members = [ "${sigmaUser}" ];
+    users.groups.scanner.members = [ sigmaUser ];
 
     # Utilities for scanner
     environment.systemPackages = with pkgs; [

@@ -7,7 +7,7 @@
   services.syncthing = {
     enable = lib.mkDefault true;
 
-    user = "${sigmaUser}";
+    user = sigmaUser;
     group = "users";
     dataDir = "/home/${sigmaUser}";
   };

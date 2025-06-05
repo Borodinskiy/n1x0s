@@ -22,7 +22,7 @@ in
         ports = [ 40242 ];
 
         settings = {
-          AllowUsers = [ "${sigmaUser}" ];
+          AllowUsers = [ sigmaUser ];
           PasswordAuthentication = cfg.home;
           PermitRootLogin = lib.mkDefault "no";
           UseDns = true;

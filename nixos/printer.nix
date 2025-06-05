@@ -12,7 +12,7 @@ in
 {
   config = lib.mkIf cfg {
     services.printing.enable = true;
-    users.groups.lp.members = [ "${sigmaUser}" ];
+    users.groups.lp.members = [ sigmaUser ];
 
     # Utilities for printer
     environment.systemPackages = with pkgs; [

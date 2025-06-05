@@ -190,5 +190,12 @@ in
       # Wallpaper tools
       swaybg
       waypaper
-    ];
+    ]
+
+    # Theme packages
+    ++ (with config.module.theme; [
+      package
+      iconTheme.package
+      cursor.package
+    ]);
 }

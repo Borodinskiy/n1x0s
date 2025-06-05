@@ -2,5 +2,5 @@
 {
   networking.networkmanager.enable = true;
 
-  users.extraGroups.networkmanager.members = [ "${sigmaUser}" ];
+  users.extraGroups.networkmanager.members = [ sigmaUser ];
 }
