@@ -19,11 +19,16 @@ in
 
       recommendedProxySettings = true;
 
-      virtualHosts."${config.networking.hostName}" = {
-        locations."/" = {
-          proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+      virtualHosts."${config.networking.hostName}" =
+        let
+          address = config.services.nix-serve.bindAddress;
+          port = toString config.services.nix-serve.port;
+        in
+        {
+          locations."/" = {
+            proxyPass = "http://${address}:${port}";
+          };
         };
-      };
     };
   };
 }

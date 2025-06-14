@@ -81,7 +81,7 @@ in
     ++ lib.optionals group.gaming [
       gamescope # Compositor in a window
       mangohud # MSI Afterburner 2
-      wineWowPackages.staging # Windows !emulator
+      wineWowPackages.full # Windows !emulator
       unstable.winetricks # Script to install windows DLLs
       icoutils # Extract images from .ico/.exe files using icotool/wrestool
       protonup # Manage custom steam Proton versions
@@ -90,7 +90,7 @@ in
 
     ++ lib.optionals group.texlive [
       texlive.combined.scheme-full # All packages :/ 4GiB+
-      tex-fmt # .text file formatter
+      tex-fmt # .tex file formatter
     ]
 
     ++ lib.optionals group.office [
@@ -114,7 +114,7 @@ in
       ghidra
       jadx
 
-      # steganography files
+      # Steganography files
       binwalk
       steghide
       stegseek
@@ -172,7 +172,7 @@ in
       hyprpicker # Color picker
       pavucontrol # GUI for sound mixer
 
-      # cli
+      # Cli
       pamixer
       playerctl
 
