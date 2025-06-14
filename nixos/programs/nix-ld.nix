@@ -13,60 +13,140 @@ in
     programs.nix-ld = {
       enable = true;
       libraries = with pkgs; [
-        # Libc
-        stdenv.cc.cc.lib
-        libGL
-        libGLU
-        # SDL
-        SDL
-        SDL_image
-        SDL_sound
-        SDL_mixer
-        SDL_ttf
-        # SDL2
-        SDL2
-        SDL2_image
-        SDL2_sound
-        SDL2_mixer
-        SDL2_ttf
-        # Xorg
-        xorg.libX11
-        xorg.libXext
-        xorg.libXinerama
-        xorg.libXrandr
-        xorg.libXcursor
-        xorg.libxcb
-        xorg.libSM
-        xorg.libICE
-        # GTK
-        gtk2-x11
-        gtk3-x11
-        glib
-        gobject-introspection
-        # Sound
-        alsa-lib
-        libpulseaudio
-        # Fonts
-        freetype
-        wayland-utils
-        wayland
-        waylandpp
-        # Etc
+        # List by default
         zlib
-        # C#
-        dotnet-runtime_8
-        icu
-        fontconfig
-        xorg.libICE
-        xorg.libSM
-        dbus
+        zstd
+        stdenv.cc.cc
         curl
-        gnutls
-        libgnurl
+        openssl
+        attr
+        libssh
+        bzip2
+        libxml2
+        acl
+        libsodium
+        util-linux
+        xz
+        systemd
+
+        # My own additions
+        xorg.libXcomposite
+        xorg.libXtst
+        xorg.libXrandr
+        xorg.libXext
+        xorg.libX11
+        xorg.libXfixes
+        libGL
+        libva
+        pipewire
+        xorg.libxcb
+        xorg.libXdamage
+        xorg.libxshmfence
+        xorg.libXxf86vm
+        libelf
+
+        # Required
         glib
+        gtk2
+
+        # Inspired by steam
+        # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix#L36-L85
+        networkmanager
+        vulkan-loader
+        libgbm
+        libdrm
+        libxcrypt
+        coreutils
+        pciutils
+        zenity
+        # glibc_multi.bin # Seems to cause issue in ARM
+
+        # # Without these it silently fails
+        xorg.libXinerama
+        xorg.libXcursor
+        xorg.libXrender
+        xorg.libXScrnSaver
+        xorg.libXi
+        xorg.libSM
+        xorg.libICE
+        gnome2.GConf
+        nspr
+        nss
+        cups
+        libcap
+        SDL2
+        libusb1
+        dbus-glib
+        ffmpeg
+        # Only libraries are needed from those two
+        libudev0-shim
+
+        # needed to run unity
+        gtk3
+        icu
+        libnotify
+        gsettings-desktop-schemas
+        # https://github.com/NixOS/nixpkgs/issues/72282
+        # https://github.com/NixOS/nixpkgs/blob/2e87260fafdd3d18aa1719246fd704b35e55b0f2/pkgs/applications/misc/joplin-desktop/default.nix#L16
+        # log in /home/leo/.config/unity3d/Editor.log
+        # it will segfault when opening files if you don’t do:
+        # export XDG_DATA_DIRS=/nix/store/0nfsywbk0qml4faa7sk3sdfmbd85b7ra-gsettings-desktop-schemas-43.0/share/gsettings-schemas/gsettings-desktop-schemas-43.0:/nix/store/rkscn1raa3x850zq7jp9q3j5ghcf6zi2-gtk+3-3.24.35/share/gsettings-schemas/gtk+3-3.24.35/:$XDG_DATA_DIRS
+        # other issue: (Unity:377230): GLib-GIO-CRITICAL **: 21:09:04.706: g_dbus_proxy_call_sync_internal: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+        # Verified games requirements
+        xorg.libXt
+        xorg.libXmu
+        libogg
+        libvorbis
+        SDL
+        SDL2_image
+        glew110
+        libidn
+        tbb
+
+        # Other things from runtime
+        flac
+        freeglut
+        libjpeg
+        libpng
+        libpng12
+        libsamplerate
+        libmikmod
+        libtheora
+        libtiff
+        pixman
+        speex
+        SDL_image
+        SDL_ttf
+        SDL_mixer
+        SDL2_ttf
+        SDL2_mixer
+        libappindicator-gtk2
+        libdbusmenu-gtk2
+        libindicator-gtk2
+        libcaca
+        libcanberra
+        libgcrypt
+        libvpx
+        librsvg
+        xorg.libXft
+        libvdpau
+        # ...
+        # Some more libraries that I needed to run programs
         pango
         cairo
+        atk
         gdk-pixbuf
+        fontconfig
+        freetype
+        dbus
+        alsa-lib
+        expat
+        # For blender
+        libxkbcommon
+        # For natron
+        libxcrypt-legacy
+        libGLU
       ];
     };
   };

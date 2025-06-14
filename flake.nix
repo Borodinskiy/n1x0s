@@ -9,14 +9,11 @@
     # Default nixpkgs version
     nixpkgs.follows = "unstable";
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
     # Declarative disk partitioning (for server)
     disko.url = "github:nix-community/disko";
 
     # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    chaotic.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -61,8 +58,6 @@
       defaultNixos = [
         ./options
         ./nixos
-        inputs.chaotic.nixosModules.default
-        { chaotic.nyx.cache.enable = false; }
       ];
 
       nixosServer = [
