@@ -6,6 +6,7 @@
 }:
 let
   group = config.module.include;
+  purp = config.module.purpose;
 in
 {
   environment.systemPackages =
@@ -32,7 +33,6 @@ in
       git # Version control system
       tmux # Terminal multiplexor
       btop # Process monitor
-      yazi # Cli file manager
       efibootmgr # UEFI boot entry management
 
       # Different archive formats
@@ -51,8 +51,25 @@ in
       pciutils
     ]
 
-    ++ lib.optionals group.develop [
+    ++ lib.optionals purp.home [
       foot # Terminal
+
+      # Clipboard support for wayland
+      wl-clipboard
+      cliphist
+    ]
+
+    # Theme packages
+    ++ lib.optionals purp.home (
+      with config.module.theme;
+      [
+        package
+        iconTheme.package
+        cursor.package
+      ]
+    )
+
+    ++ lib.optionals group.develop [
       okteta # Hex editor
       godot_4 # Game engine
       vscodium # IDE Browser 229
@@ -64,10 +81,6 @@ in
       # Dependency of Lazy nvim plugin manager
       lua5_1
       lua51Packages.luarocks
-
-      # Clipboard support for wayland
-      wl-clipboard
-      cliphist
 
       # Language servers and etc.
       lua-language-server # Lua
@@ -81,7 +94,7 @@ in
     ++ lib.optionals group.gaming [
       gamescope # Compositor in a window
       mangohud # MSI Afterburner 2
-      wineWowPackages.full # Windows !emulator
+      umu-launcher # Steam runtime without steam
       unstable.winetricks # Script to install windows DLLs
       icoutils # Extract images from .ico/.exe files using icotool/wrestool
       protonup # Manage custom steam Proton versions
@@ -190,12 +203,5 @@ in
       # Wallpaper tools
       swaybg
       waypaper
-    ]
-
-    # Theme packages
-    ++ (with config.module.theme; [
-      package
-      iconTheme.package
-      cursor.package
-    ]);
+    ];
 }
