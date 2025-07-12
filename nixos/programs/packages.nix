@@ -78,17 +78,14 @@ in
       yt-dlp # Download videos from url
       android-tools # Adb/fastboot for android device debugging, removing shit, reinstalling shindows and removing [company] software
 
-      # Dependency of Lazy nvim plugin manager
-      lua5_1
-      lua51Packages.luarocks
-
       # Language servers and etc.
       lua-language-server # Lua
       bash-language-server # Bash
       nixd # Nix
+      vscode-langservers-extracted # Css/json/... extracted from vscode
+
       nixfmt-rfc-style # Nix code formatter
       treefmt # Autoformat of code files
-      vscode-langservers-extracted # Css/json/... extracted from vscode
     ]
 
     ++ lib.optionals group.gaming [
@@ -147,7 +144,7 @@ in
 
       # Image
       krita
-      gimp
+      gimp3
 
       # Render
       kdePackages.kdenlive
@@ -156,6 +153,11 @@ in
     ]
 
     ++ lib.optionals group.surf [
+      # V[M/L]ess, shadowsocks, etc. clients
+      sing-box
+      xray
+      v2rayn # Front end for setting up xray and singbox
+
       # Browsers
       tor-browser
       librewolf
