@@ -153,10 +153,8 @@ in
     ]
 
     ++ lib.optionals group.surf [
-      # V[M/L]ess, shadowsocks, etc. clients
+      # V[M/L]ess, shadowsocks, etc. client
       sing-box
-      xray
-      v2rayn # Front end for setting up xray and singbox
 
       # Browsers
       tor-browser
