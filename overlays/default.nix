@@ -45,7 +45,7 @@
             path = ./gconf/gsettings-schema-convert;
           in
           ''
-              cp "${path}" gsettings/gsettings-schema-convert
+            cp "${path}" gsettings/gsettings-schema-convert
           '';
       });
 

@@ -16,17 +16,20 @@ in
         enable = true;
         wayland.enable = true;
         autoNumlock = true;
-        theme = "n1x0s-sddm";
         settings.Theme = {
           CursorTheme = theme.cursor.name;
           CursorSize = theme.cursor.size;
         };
       };
       environment.systemPackages = with pkgs; [
-        # Custom background package for display manager
-        n1x0s-sddm
         # Custom cursor theme
         theme.cursor.package
+        # Custom background by making a configuration file
+        (writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+          [General]
+          background = ${theme.wallpaper.displayManager}
+        '')
+
       ];
     })
 

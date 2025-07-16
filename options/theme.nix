@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  resourcePath,
   ...
 }:
 {
@@ -45,6 +46,10 @@
 
         sizeSway = lib.mkOption { default = 10.0; };
       };
+    };
+
+    wallpaper = {
+      displayManager = lib.mkOption { default = resourcePath + "/wallpapers/resonance.webp"; };
     };
   };
 }

@@ -31,6 +31,6 @@ install -d -m 700 "$WORKDIR"
 cp -r assets hosts nixos options overlays packages flake.lock flake.nix \
 	"$WORKDIR"
 
-$RUNME -L --use-remote-sudo --flake "$WORKDIR#$TARGET" "$ACTION" "${@:3}"
+$RUNME -L --sudo --flake "$WORKDIR#$TARGET" "$ACTION" "${@:3}"
 
 rm -rf "$WORKDIR"
