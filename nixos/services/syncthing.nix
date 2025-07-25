@@ -1,14 +1,20 @@
 {
+  config,
   lib,
   sigmaUser,
   ...
 }:
+let
+  cfg = config.module.purpose.home;
+in
 {
-  services.syncthing = {
-    enable = lib.mkDefault true;
+  config = lib.mkIf cfg {
+    services.syncthing = {
+      enable = lib.mkDefault true;
 
-    user = sigmaUser;
-    group = "users";
-    dataDir = "/home/${sigmaUser}";
+      user = sigmaUser;
+      group = "users";
+      dataDir = "/home/${sigmaUser}";
+    };
   };
 }
