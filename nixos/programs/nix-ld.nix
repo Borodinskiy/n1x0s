@@ -16,7 +16,7 @@ in
         # List by default
         zlib
         zstd
-        stdenv.cc.cc
+        stdenv.cc.cc.lib
         curl
         openssl
         attr

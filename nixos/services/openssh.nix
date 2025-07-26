@@ -6,11 +6,15 @@
 }:
 let
   cfg = config.module.purpose;
+  autostart = config.module.openssh.autostart;
 in
 {
+  options = {
+    module.openssh.autostart = lib.mkEnableOption "autostart ssh service";
+  };
   config = lib.mkMerge [
     # Disable service autostart on home machines
-    (lib.mkIf cfg.home {
+    (lib.mkIf (cfg.home && !autostart) {
       systemd.services.sshd.wantedBy = lib.mkForce [ ];
     })
 
@@ -18,7 +22,7 @@ in
       services.openssh = {
         enable = true;
 
-        openFirewall = cfg.server;
+        openFirewall = cfg.server || autostart;
         ports = [ 40242 ];
 
         settings = {

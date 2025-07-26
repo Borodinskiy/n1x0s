@@ -2,11 +2,17 @@
 {
   custom = final: _prev: import ../packages final.pkgs;
 
-  unstable = final: _prev: {
-    unstable = import inputs.unstable {
-      system = final.system;
+  otherNixpkgs =
+    final: _prev:
+    let
+      settings = {
+        system = final.system;
+      };
+    in
+    {
+      unstable = import inputs.unstable settings;
+      stable = import inputs.stable settings;
     };
-  };
 
   overrides =
     {
