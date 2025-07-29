@@ -14,36 +14,37 @@ in
       enable = true;
       libraries = with pkgs; [
         # List by default
-        zlib
-        zstd
-        stdenv.cc.cc.lib
-        curl
-        openssl
-        attr
-        libssh
-        bzip2
-        libxml2
         acl
+        attr
+        bzip2
+        curl
         libsodium
+        libssh
+        libxml2
+        openssl
+        stdenv.cc.cc.lib
+        systemd
         util-linux
         xz
-        systemd
+        zlib
+        zstd
 
         # My own additions
-        xorg.libXcomposite
-        xorg.libXtst
-        xorg.libXrandr
-        xorg.libXext
-        xorg.libX11
-        xorg.libXfixes
         libGL
+        libelf
         libva
         pipewire
-        xorg.libxcb
+        xorg.libX11
+        xorg.libXcomposite
         xorg.libXdamage
-        xorg.libxshmfence
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXrandr
+        xorg.libXtst
         xorg.libXxf86vm
-        libelf
+        xorg.libxcb
+        xorg.libxshmfence
+        e2fsprogs # libcom_err.so.2
 
         # Required
         glib
@@ -51,41 +52,40 @@ in
 
         # Inspired by steam
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix#L36-L85
-        networkmanager
-        vulkan-loader
-        libgbm
-        libdrm
-        libxcrypt
-        coreutils
-        pciutils
-        zenity
         # glibc_multi.bin # Seems to cause issue in ARM
+        coreutils
+        libdrm
+        libgbm
+        libxcrypt
+        networkmanager
+        pciutils
+        vulkan-loader
+        zenity
 
         # # Without these it silently fails
-        xorg.libXinerama
-        xorg.libXcursor
-        xorg.libXrender
-        xorg.libXScrnSaver
-        xorg.libXi
-        xorg.libSM
-        xorg.libICE
-        gnome2.GConf
-        nspr
-        nss
-        cups
-        libcap
         SDL2
-        libusb1
+        cups
         dbus-glib
         ffmpeg
-        # Only libraries are needed from those two
-        libudev0-shim
+        gnome2.GConf
+        libcap
+        libudev0-shim # Only libraries are needed from those two
+        libusb1
+        nspr
+        nss
+        xorg.libICE
+        xorg.libSM
+        xorg.libXScrnSaver
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXrender
 
         # needed to run unity
+        gsettings-desktop-schemas
         gtk3
         icu
         libnotify
-        gsettings-desktop-schemas
         # https://github.com/NixOS/nixpkgs/issues/72282
         # https://github.com/NixOS/nixpkgs/blob/2e87260fafdd3d18aa1719246fd704b35e55b0f2/pkgs/applications/misc/joplin-desktop/default.nix#L16
         # log in /home/leo/.config/unity3d/Editor.log
@@ -94,59 +94,59 @@ in
         # other issue: (Unity:377230): GLib-GIO-CRITICAL **: 21:09:04.706: g_dbus_proxy_call_sync_internal: assertion 'G_IS_DBUS_PROXY (proxy)' failed
 
         # Verified games requirements
-        xorg.libXt
-        xorg.libXmu
-        libogg
-        libvorbis
         SDL
         SDL2_image
         glew110
         libidn
+        libogg
+        libvorbis
         tbb
+        xorg.libXmu
+        xorg.libXt
 
         # Other things from runtime
+        SDL2_mixer
+        SDL2_ttf
+        SDL_image
+        SDL_mixer
+        SDL_ttf
         flac
         freeglut
-        libjpeg
-        libpng
-        libpng12
-        libsamplerate
-        libmikmod
-        libtheora
-        libtiff
-        pixman
-        speex
-        SDL_image
-        SDL_ttf
-        SDL_mixer
-        SDL2_ttf
-        SDL2_mixer
         libappindicator-gtk2
-        libdbusmenu-gtk2
-        libindicator-gtk2
         libcaca
         libcanberra
+        libdbusmenu-gtk2
         libgcrypt
-        libvpx
+        libindicator-gtk2
+        libjpeg
+        libmikmod
+        libpng
+        libpng12
         librsvg
-        xorg.libXft
+        libsamplerate
+        libtheora
+        libtiff
         libvdpau
+        libvpx
+        pixman
+        speex
+        xorg.libXft
         # ...
         # Some more libraries that I needed to run programs
-        pango
-        cairo
+        alsa-lib
         atk
-        gdk-pixbuf
+        cairo
+        dbus
+        expat
         fontconfig
         freetype
-        dbus
-        alsa-lib
-        expat
-        # For blender
-        libxkbcommon
+        gdk-pixbuf
+        libxkbcommon # For blender
+        pango
+
         # For natron
-        libxcrypt-legacy
         libGLU
+        libxcrypt-legacy
       ];
     };
   };

@@ -6,7 +6,6 @@ let
       ''
         # Helpful to read output when debugging
         set -x
-        echo "$(date) ''$*" >> "/tmp/start.txt"
 
         systemctl() {
           "${systemd}/bin/systemctl" "$@"
@@ -15,16 +14,26 @@ let
           "${libvirt}/bin/virsh" "$@"
         }
 
+        # Check if vm have "vfio" in it's name
         [ "$(echo "$1" | grep "vfio")" == "" ] && exit 0
+        # Check if hook was executed by "prepare begin" arguments
         [ "$(echo "''${*:2}" | grep "prepare begin")" == "" ] && exit 0
-        echo '`-passed!!!' >> "/tmp/start.txt"
 
-        # Stop display manager
-        systemctl stop display-manager.service
-        ## Uncomment the following line if you use GDM
-        #killall gdm-x-session
+        if systemctl --quiet is-active sing-box.service; then
+          systemctl stop sing-box.service
+        fi
+        if ! systemctl --quiet is-active sshd.service; then
+          systemctl start sshd.service
+          iptables -I nixos-fw 3 -p tcp -m tcp --dport 40242 -j nixos-fw-accept
+        fi
 
-        sleep 5
+        while systemctl --quiet is-active display-manager.service; do
+          # Stop display manager
+          systemctl stop display-manager.service
+          ## Uncomment the following line if you use GDM
+          #killall gdm-x-session
+          sleep 5
+        done
 
         rmmod nvidia_drm
         rmmod nvidia_uvm
@@ -38,7 +47,7 @@ let
         echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind
 
         # Avoid a Race condition by waiting 2 seconds. This can be calibrated to be shorter or longer if required for your system
-        sleep 1
+        sleep 2
 
         # Unbind the GPU from display driver
         virsh nodedev-detach pci_0000_01_00_0
