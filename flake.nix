@@ -10,10 +10,17 @@
     nixpkgs.follows = "unstable";
 
     # Declarative disk partitioning (for server)
-    disko.url = "github:nix-community/disko";
+    disko = {
+      url = "github:nix-community/disko";
+      # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    # Proton launcher outside steam
+    umu = {
+      url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

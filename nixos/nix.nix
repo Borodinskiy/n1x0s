@@ -17,6 +17,7 @@
 
   nixpkgs = {
     overlays = [
+      inputs.umu.overlays.default
       outputs.overlays.custom
       outputs.overlays.otherNixpkgs
       (outputs.overlays.overrides {

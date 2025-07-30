@@ -4,7 +4,7 @@
 }:
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_6;
+    kernelPackages = pkgs.linuxPackages_6_15;
     kernelModules = [ ];
   };
 
