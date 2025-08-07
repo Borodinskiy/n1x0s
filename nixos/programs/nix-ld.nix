@@ -120,6 +120,7 @@ in
         libindicator-gtk2
         libjpeg
         libmikmod
+        harfbuzz
         libpng
         libpng12
         librsvg

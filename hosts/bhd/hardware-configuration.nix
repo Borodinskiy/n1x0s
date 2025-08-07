@@ -31,7 +31,7 @@
   fileSystems =
     let
       user_uid = sigmaUidStr;
-      #user_gid = "100";  # "users" group id
+      user_gid = "100"; # "users" group id
 
       fsoptionsLin = [
         "rw"
@@ -40,12 +40,9 @@
       fsoptionsHDD = [
         "rw"
         "uid=${user_uid}"
+        "gid=${user_gid}"
       ];
-      fsoptionsSSD = [
-        "rw"
-        "uid=${user_uid}"
-        "discard"
-      ];
+      fsoptionsSSD = fsoptionsHDD ++ [ "discard" ];
     in
     {
       "/" = {

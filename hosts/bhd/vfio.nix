@@ -8,9 +8,9 @@
 
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  programs.virt-manager.enable = true;
 
-  # No auth when launching program
+  programs.virt-manager.enable = true;
+  # No auth when using virt-manager
   users.groups.libvirtd.members = [ sigmaUser ];
 
   boot = {
@@ -18,7 +18,6 @@
       "vfio"
       "vfio_iommu_type1"
       "vfio_pci"
-      #"vfio_virqfd"
     ];
 
     kernelParams = [
