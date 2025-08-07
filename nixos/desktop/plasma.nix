@@ -6,11 +6,12 @@
 }:
 let
   cfg = config.module.de.plasma;
+  cfgDm = config.module.dm.sddm;
   theme = config.module.theme;
 in
 {
   config = lib.mkMerge [
-    (lib.mkIf cfg.displayManager.enable {
+    (lib.mkIf cfgDm.enable {
       services.displayManager.defaultSession = "plasma";
       services.displayManager.sddm = {
         enable = true;

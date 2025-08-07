@@ -15,12 +15,6 @@
       # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Proton launcher outside steam
-    umu = {
-      url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =

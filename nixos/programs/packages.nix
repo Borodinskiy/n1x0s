@@ -39,7 +39,7 @@ in
       zip
       unzip
       p7zip
-      unar
+      unrar
       lzip
 
       # Process ls
@@ -91,16 +91,10 @@ in
     ++ lib.optionals group.gaming [
       gamescope # Compositor in a window
       mangohud # MSI Afterburner 2
-      umu-launcher # Steam runtime without steam
       unstable.winetricks # Script to install windows DLLs
       icoutils # Extract images from .ico/.exe files using icotool/wrestool
       protonup # Manage custom steam Proton versions
       prismlauncher # Minecraft launcher
-    ]
-
-    ++ lib.optionals group.texlive [
-      texlive.combined.scheme-full # All packages :/ 4GiB+
-      tex-fmt # .tex file formatter
     ]
 
     ++ lib.optionals group.office [

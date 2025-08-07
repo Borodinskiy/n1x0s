@@ -6,12 +6,7 @@ in
   options.module.de = {
     plasma = {
       enable = lib.mkEnableOption "kde plasma";
-      displayManager.enable = lib.mkEnableOption "sddm" // {
-        default = cfg.de.plasma.enable;
-      };
     };
-
-    lomiri.enable = lib.mkEnableOption "lomiri desktop environment";
 
     sway.enable = lib.mkEnableOption "sway";
 
@@ -20,5 +15,8 @@ in
 
   options.module.dm = {
     greetd.enable = lib.mkEnableOption "greetd display manager";
+    sddm.enable = lib.mkEnableOption "sddm" // {
+      default = cfg.de.plasma.enable;
+    };
   };
 }

@@ -5,51 +5,43 @@
   resourcePath,
   ...
 }:
+let
+  option = default: lib.mkOption { inherit default; };
+in
 {
   options.module.theme = {
-    package = lib.mkOption { default = pkgs.kdePackages.breeze-gtk; };
-    name = lib.mkOption { default = "Breeze-Dark"; };
+    package = option pkgs.kdePackages.breeze-gtk;
+    name = option "Breeze-Dark";
 
     iconTheme = {
-      package = lib.mkOption { default = pkgs.kdePackages.breeze-icons; };
-      name = lib.mkOption { default = "breeze-dark"; };
+      package = option pkgs.kdePackages.breeze-icons;
+      name = option "breeze-dark";
     };
 
     cursor = {
-      package = lib.mkOption { default = pkgs.material-cursors; };
-
-      name = lib.mkOption { default = "material_cursors"; };
-
-      size = lib.mkOption { default = 32; };
-
-      sizeStr = lib.mkOption { default = builtins.toString config.module.theme.cursor.size; };
+      package = option pkgs.material-cursors;
+      name = option "material_cursors";
+      size = option 32;
+      sizeStr = option (builtins.toString config.module.theme.cursor.size);
     };
 
     font = {
       text = {
-        package = lib.mkOption { default = pkgs.noto-fonts; };
-
-        name = lib.mkOption { default = "Noto Sans"; };
-
-        size = lib.mkOption { default = 10; };
-
-        sizeSwaylock = lib.mkOption { default = 10.0; };
+        package = option pkgs.noto-fonts;
+        name = option "Noto Sans";
+        size = option 10;
       };
 
       mono = {
-        package = lib.mkOption { default = pkgs.hack-font; };
-        packageNerd = lib.mkOption { default = pkgs.nerd-fonts.hack; };
-
-        name = lib.mkOption { default = "Hack"; };
-
-        size = lib.mkOption { default = 10; };
-
-        sizeSway = lib.mkOption { default = 10.0; };
+        package = option pkgs.hack-font;
+        packageNerd = option pkgs.nerd-fonts.hack;
+        name = option "Hack";
+        size = option 10;
       };
     };
 
     wallpaper = {
-      displayManager = lib.mkOption { default = resourcePath + "/wallpapers/resonance.webp"; };
+      displayManager = option (resourcePath + "/wallpapers/resonance.webp");
     };
   };
 }

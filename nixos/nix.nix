@@ -17,7 +17,6 @@
 
   nixpkgs = {
     overlays = [
-      inputs.umu.overlays.default
       outputs.overlays.custom
       outputs.overlays.otherNixpkgs
       (outputs.overlays.overrides {
@@ -80,5 +79,6 @@
       "blender"
       # Network analysis and request edit tool for web
       "burpsuite"
+      "unrar"
     ];
 }
