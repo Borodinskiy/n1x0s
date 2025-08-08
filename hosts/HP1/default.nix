@@ -6,6 +6,7 @@
 
   module = {
     purpose.home = true;
+    purpose.laptop = true;
 
     driver.gpu.amd.enable = true;
 
