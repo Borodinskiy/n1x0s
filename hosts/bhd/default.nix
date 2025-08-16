@@ -20,7 +20,5 @@
   environment.systemPackages = with pkgs; [
     rpcs3
     pcsx2
-    ryujinx
-    cemu
   ];
 }

@@ -15,6 +15,10 @@
       # Modules have it's own nixpkgs input. Syncing its with our's for disk economy (no)
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -59,6 +63,7 @@
       defaultNixos = [
         ./options
         ./nixos
+        inputs.lanzaboote.nixosModules.lanzaboote
       ];
 
       nixosServer = [

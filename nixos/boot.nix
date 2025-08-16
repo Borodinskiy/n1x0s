@@ -7,9 +7,12 @@
 let
   purp = config.module.purpose;
   include = config.module.include;
+  generationEntriesLimit = 12;
 in
 {
   boot.loader = {
+    systemd-boot.configurationLimit = generationEntriesLimit ;
+    grub.configurationLimit = generationEntriesLimit ;
     timeout = 3;
     grub = {
       default = "saved";

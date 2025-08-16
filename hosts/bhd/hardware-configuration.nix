@@ -1,19 +1,43 @@
 {
-  config,
-  lib,
-  modulesPath,
-  sigmaUser,
-  sigmaUidStr,
-  ...
+pkgs,
+config,
+lib,
+modulesPath,
+sigmaUser,
+sigmaUidStr,
+...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   boot = {
+    # FIXME: this not shows in lanzaboote systemd-boot version
     loader = {
-      efi.efiSysMountPoint = "/efi";
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        windows = {
+          "windows" = {
+            title = "Windows";
+            efiDeviceHandle = "HD1b3";
+            sortKey = "y_windows";
+          };
+        };
+        edk2-uefi-shell = {
+          enable = true;
+          sortKey = "z_edk2";
+        };
+      };
     };
+
+    # secureboot
+    loader.systemd-boot.enable = lib.mkForce false;
+    loader.grub.enable = false;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
+    };
+
     supportedFilesystems = [ "ntfs" ];
     initrd.availableKernelModules = [
       "xhci_pci"
@@ -28,6 +52,9 @@
     kernelParams = [ "nowatchdog" ];
     blacklistedKernelModules = [ "iTCO_wdt" ]; # intel watchdog
   };
+  environment.systemPackages = with pkgs; [
+    sbctl
+  ];
   fileSystems =
     let
       user_uid = sigmaUidStr;
@@ -50,12 +77,13 @@
         fsType = "ext4";
         options = fsoptionsLin;
       };
-      "/efi" = {
-        device = "/dev/disk/by-uuid/7F38-D49E";
+      "/boot" = {
+        device = "/dev/disk/by-uuid/1092-7F10";
         fsType = "vfat";
         options = [
-          "fmask=0022"
-          "dmask=0022"
+          "fmask=0137"
+          "dmask=0027"
+          "errors=remount-ro"
         ];
       };
       "/run/media/${sigmaUser}/drive_d" = {
