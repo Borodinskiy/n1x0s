@@ -153,6 +153,7 @@ in
       # Browsers
       tor-browser
       librewolf
+      thunderbird
       qutebrowser
       qbittorrent
 
@@ -167,6 +168,7 @@ in
       telegram-desktop
       discord
       simplex-chat-desktop
+      deltachat-desktop
       mumble
     ]
 

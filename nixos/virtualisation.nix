@@ -9,17 +9,30 @@ let
   cfg = config.module.include.virtualisation;
 in
 {
-  config = lib.mkIf cfg {
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [
-      sigmaUser
-    ];
+  config = lib.mkMerge [
+    (lib.mkIf cfg.libvirt {
+      virtualisation.libvirtd.enable = true;
+      virtualisation.spiceUSBRedirection.enable = true;
 
-    virtualisation.docker.enable = true;
+      programs.virt-manager.enable = true;
+      # No auth when using virt-manager
+      users.groups.libvirtd.members = [ sigmaUser ];
+    })
 
-    environment.systemPackages = with pkgs; [
-      docker-compose
-      qemu
-    ];
-  };
+    (lib.mkIf cfg.virtualbox {
+      virtualisation.virtualbox.host.enable = true;
+      users.extraGroups.vboxusers.members = [
+        sigmaUser
+      ];
+    })
+
+    (lib.mkIf cfg.docker {
+      virtualisation.docker.enable = true;
+      environment.systemPackages = with pkgs; [ docker-compose ];
+    })
+
+    (lib.mkIf cfg.qemu {
+      environment.systemPackages = with pkgs; [ qemu ];
+    })
+  ];
 }
