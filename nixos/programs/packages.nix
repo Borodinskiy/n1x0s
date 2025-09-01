@@ -91,6 +91,7 @@ in
     ++ lib.optionals group.gaming [
       gamescope # Compositor in a window
       mangohud # MSI Afterburner 2
+      wineWowPackages.stable
       unstable.winetricks # Script to install windows DLLs
       icoutils # Extract images from .ico/.exe files using icotool/wrestool
       protonup # Manage custom steam Proton versions

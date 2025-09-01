@@ -4,7 +4,7 @@
 }:
 {
   imports = lsDir ./vfio-hooks;
-  include.virtualisation.libvirt = true;
+  module.include.virtualisation.libvirt = true;
 
   boot = {
     initrd.availableKernelModules = [
